@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   user: {id: number, name: string};
+  paramsSubscription: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute) { }
+
+  ngOnDestroy(): void {
+    // requis si on crée nos propres observables, pas pour celles par défaut de angular
+    this.paramsSubscription.unsubscribe();
+  }
 
   ngOnInit() {
     // hydrate le component seulement lors de son rendu et plus après
@@ -19,7 +26,7 @@ export class UserComponent implements OnInit {
     };
 
     // permet de subscribe si le component doit être rafrachi au cout d'un subscribe
-    this.activatedRoute.params.subscribe(
+    this.paramsSubscription = this.activatedRoute.params.subscribe(
       (params: Params) => {
         this.user.id = params['id'];
         this.user.name = params['name'];
