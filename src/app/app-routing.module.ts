@@ -34,7 +34,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    // {useHash: true} permet d'override les redirections du server (iis, apache...)
+    RouterModule.forRoot(appRoutes/*, {useHash: true}*/)
   ],
   exports: [RouterModule]
 })
