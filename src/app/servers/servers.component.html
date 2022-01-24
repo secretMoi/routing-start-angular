@@ -13,11 +13,13 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-4">
+    <router-outlet></router-outlet>
+
     <!-- le / au début permet de spécifier qu'on est dans un chemin absolu, sinon il serait relatif -->
 <!--    cela donnerait /servers/servers au lieu de /servers-->
-    <a class="btn btn-primary" (click)="onReload()">Reload page</a>
-    <app-edit-server></app-edit-server>
-    <hr>
+<!--    <a class="btn btn-primary" (click)="onReload()">Reload page</a>-->
+<!--    <app-edit-server></app-edit-server>-->
+<!--    <hr>-->
 <!--    <app-server></app-server>-->
   </div>
 </div>
